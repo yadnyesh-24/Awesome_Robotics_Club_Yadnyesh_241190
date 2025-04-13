@@ -1,0 +1,6 @@
+1. Autonomous navigation
+  •SLAM is a unique mixture of sensing the nearby environment while creating a virtual map of helpful information.
+  •The fact that we are moving our robot will force us to sense the environment in real-time, and it would be exciting to see the bot work while we can see what the bot sees through its eyes.
+2. Hexapod
+  •Synchronized motion of the bot and mobility control of its legs to ensure the motion we want is what is taking place.
+  •Developing a robot is exciting and enough reason to work on it.

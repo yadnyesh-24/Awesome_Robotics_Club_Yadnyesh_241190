@@ -42,6 +42,8 @@ Each line is a row of the maze. Maze cells can be:
 - The total distance calculated for this purpose from going from node A to node B is the distance cost for reaching A + distance cost for reaching B.
 - This way, we calculate the shortest distance we can take to reach all the nodes given.
 - This code runs repeatedly until we reach the ending node, and the total distance count is calculated there.
+- The priority queue is updated in each iteration to tell which next node should be calculated.
+- The priority queue is a mean heap that tells the node with the minimum distance from the node we have, i.e., the node we must seek next.
 
 ---
 

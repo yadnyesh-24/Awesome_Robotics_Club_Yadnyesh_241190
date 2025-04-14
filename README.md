@@ -42,3 +42,9 @@ Each line is a row of the maze. Maze cells can be:
 - The total distance calculated for this purpose from going from node A to node B is the distance cost for reaching A + distance cost for reaching B.
 - This way, we calculate the shortest distance we can take to reach all the nodes given.
 - This code runs repeatedly until we reach the ending node, and the total distance count is calculated there.
+
+---
+
+## Future changes
+
+- We can add a feature always to keep track of which node we were right before coming to this node, so when we get the smallest path of reaching there,  we also get the node we followed to get there, and when we  reach the destination, we will have all the nodes we traversed to get there in the shortest path.

@@ -12,36 +12,51 @@ int main() {
 
     vector<vector<int>> matrix;
     vector<vector<bool>> visited;
+    vector<vector<position>> path; // Initialize path vector
     string line;
     position start(0, 0); // Initialize start position
     position end(0, 0); // Initialize end position
     while (getline(cin, line)) {
         if (line.empty()) break; // Stop input on an empty line
         vector<int> row;
+        vector<position> pathRow; // Initialize path row
         vector<bool> visitedRow; // Initialize visited row
         for (char ch : line) {
             if (ch == ' ') continue; // Skip spaces
             // row.push_back(ch); // Store each character in the row
             if(ch=='S'||ch=='G'){
                 row.push_back(0); // Convert 'S' to '0'}
+                pathRow.push_back(position(-1, -1)); // Initialize path position
             }
             else if(ch=='.'){
                 row.push_back(1); 
+                pathRow.push_back(position(-1, -1)); // Initialize path position
+
             }
             else if(ch=='#'){
                 row.push_back(9); 
+                pathRow.push_back(position(-1, -1)); // Initialize path position
+
             }
             else if(ch=='~'){
                 row.push_back(3);
+                pathRow.push_back(position(-1, -1)); // Initialize path position
+
             }
             else if(ch=='^'){
                 row.push_back(5);
+                pathRow.push_back(position(-1, -1)); // Initialize path position
+
             };
             if(ch=='#'){
                 visitedRow.push_back(true);
+                pathRow.push_back(position(-1, -1)); // Initialize path position
+
             }
             else{
                 visitedRow.push_back(false);
+                pathRow.push_back(position(-1, -1)); // Initialize path position
+
             };
 
             if(ch=='S'){
@@ -55,29 +70,17 @@ int main() {
         }
         matrix.push_back(row);
         visited.push_back(visitedRow); // Store the visited row
-
+        path.push_back(pathRow); // Store the path row
     }
 
     // Output the matrix to verify input
-    for (const auto& row : matrix) {
-        for (int ch : row) {
-            cout << ch<<' ';
-        }
-        cout << '\n';
-    }
-
-    cout<<"The matrix element [0][0] is : "<<matrix[0][0]<<endl;
-    cout<<"The matrix element [0][1] is : "<<matrix[0][1]<<endl;
-
-    // for (const auto& row : visited) {
-    //     for (char ch : row) {
+    // for (const auto& row : matrix) {
+    //     for (int ch : row) {
     //         cout << ch<<' ';
     //     }
     //     cout << '\n';
     // }
 
-    cout<<"start position: "<<start.x<<' '<<start.y<<endl;
-    cout<<"end position: "<<end.x<<' '<<end.y<<endl;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,6 +108,18 @@ while (!pq.empty()) {
 
     if (x == end.x && y == end.y) {
         cout << "Reached the goal! Minimum cost: " << cost << '\n';
+
+        //code for printing the path
+        vector<position> rightpath;
+        position current = end;
+        while(current.x != -1 && current.y != -1) {
+            rightpath.push_back(current);
+            current = path[current.x][current.y]; // Backtrack using the path vector
+        }
+        reverse(rightpath.begin(), rightpath.end()); // Reverse the path to get the correct order
+        for(const auto& pos : rightpath) {
+            cout << "(" << pos.x << ", " << pos.y << ") "<<endl;
+        }
         break;
     }
 
@@ -116,6 +131,7 @@ while (!pq.empty()) {
             int newCost = cost + matrix[nx][ny];
             if (newCost < distance[nx][ny]) {
                 distance[nx][ny] = newCost;
+                path[nx][ny] = position(x, y); // Store the path
                 pq.push({newCost, nx, ny});
             }
         }
@@ -125,6 +141,7 @@ while (!pq.empty()) {
 if (distance[end.x][end.y] == INT_MAX) {
     cout << "Goal not reachable.\n";
 }
+
 
     return 0;
 }

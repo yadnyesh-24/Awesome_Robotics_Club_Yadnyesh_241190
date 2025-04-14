@@ -43,10 +43,7 @@ Each line is a row of the maze. Maze cells can be:
 - This way, we calculate the shortest distance we can take to reach all the nodes given.
 - This code runs repeatedly until we reach the ending node, and the total distance count is calculated there.
 - The priority queue is updated in each iteration to tell which next node should be calculated.
-- The priority queue is a mean heap that tells the node with the minimum distance from the node we have, i.e., the node we must seek next.
-
----
-
-## Future changes
-
-- We can add a feature always to keep track of which node we were right before coming to this node, so when we get the smallest path of reaching there,  we also get the node we followed to get there, and when we  reach the destination, we will have all the nodes we traversed to get there in the shortest path.
+> The priority queue is a mean heap that tells the node with the minimum distance from the node we have, i.e., the node we must seek next.
+- Then we keep track of which node we were right before coming to this node, so we get from which previous node we got to this current node for all the nodes in matrix.
+- so when we get the smallest path of reaching there,  we also get the series of nodes we followed to get there, and when we reach the destination, we will have all the nodes we traversed to get there in the shortest path.
+- The sum of costs of the path we take will be the required minimum cost.
